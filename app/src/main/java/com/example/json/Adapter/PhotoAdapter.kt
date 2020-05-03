@@ -1,14 +1,18 @@
 package com.example.json.Adapter
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.json.PhotoDataModel
 import com.example.json.R
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class PhotoAdapter(var list:ArrayList<PhotoDataModel>): RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
@@ -24,12 +28,8 @@ class PhotoAdapter(var list:ArrayList<PhotoDataModel>): RecyclerView.Adapter<Pho
 
         holder.txtID.text = list[position].getID()
         holder.txtTitle.text = list[position].getTitle()
-        holder.px_thumbnailUrl.text = list[position].getThumbnailUrl().substring(28, 31)
-        val imagePath = list[position].getUrl()
-        if(imagePath.isNotEmpty()){
-            val bitmap = BitmapFactory.decodeFile(imagePath)
-            holder.image?.setImageBitmap(bitmap)
-        }
+//        holder.px_thumbnailUrl.text = list[position].getThumbnailUrl().substring(28, 31)
+        holder.image?.setImageBitmap(list[position].getThumbnailImage())
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
