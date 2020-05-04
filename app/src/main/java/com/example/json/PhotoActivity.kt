@@ -30,14 +30,13 @@ class PhotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            Thread {
-                //Do some Network Request
-                photoList = httpGet("https://jsonplaceholder.typicode.com/photos")
-                runOnUiThread {
-                    rclPhoto?.adapter = PhotoAdapter(photoList)
-                }
-            }.start()
+        GlobalScope.launch(Dispatchers.IO) {
+            //Do some Network Request
+            photoList = httpGet("https://jsonplaceholder.typicode.com/photos")
+
+            GlobalScope.launch(Dispatchers.Main) {
+                rclPhoto?.adapter = PhotoAdapter(photoList)
+            }
         }
 
         rclPhoto.layoutManager = GridLayoutManager(this, 4)
@@ -104,7 +103,7 @@ class PhotoActivity : AppCompatActivity() {
 
         // make GET request to the given URL
         val jsonArray = JSONArray(json.toString())
-        for (i: Int in 0 until 10) {
+        for (i: Int in 0 until 24) {
             val jsonObject: JSONObject = jsonArray.getJSONObject(i)
             val albumId = jsonObject.getString("albumId")
             val id = jsonObject.getString("id")

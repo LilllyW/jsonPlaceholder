@@ -35,7 +35,7 @@ class PhotoAdapter(var list:ArrayList<PhotoDataModel>): RecyclerView.Adapter<Pho
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         var image = view.findViewById<ImageView>(R.id.image)
         var txtID = view.findViewById<TextView>(R.id.txtID)
-        var px_thumbnailUrl = view.findViewById<TextView>(R.id.px_thumbnailUrl)
+//        var px_thumbnailUrl = view.findViewById<TextView>(R.id.px_thumbnailUrl)
         var txtTitle = view.findViewById<TextView>(R.id.txtTitle)
     }
 }
